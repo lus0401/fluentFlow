@@ -6,19 +6,25 @@
 //
 
 import SwiftUI
+
 import KakaoSDKCommon
+import KakaoSDKAuth
 
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
-    KakaoSDK.initSDK(appKey: "${NATIVE_APP_KEY}")
-
-}
 
 @main
 struct fluentFlowApp: App {
+    init() {
+        
+        let kakaoAppKey = Bundle.main.infoDictionary?["KAKAO_NATIVE_APP_KEY"] ?? ""
+        
+        print("kakaoAppKey:  \(kakaoAppKey)")
+        // Kakao SDK 초기화
+        KakaoSDK.initSDK(appKey: kakaoAppKey as! String)
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView(viewModel: LoginViewModel())
         }
     }
 }
