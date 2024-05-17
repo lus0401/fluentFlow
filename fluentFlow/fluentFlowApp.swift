@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import KakaoSDKCommon
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    KakaoSDK.initSDK(appKey: "${NATIVE_APP_KEY}")
+
+}
 
 @main
 struct fluentFlowApp: App {

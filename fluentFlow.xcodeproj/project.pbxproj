@@ -60,6 +60,8 @@
 		D20A730B2BF6CC6F00D896E4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		D20A730D2BF6CC7B00D896E4 /* ChatPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPracticeViewModel.swift; sourceTree = "<group>"; };
 		D20A730F2BF6CC8400D896E4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D20A73122BF71AE000D896E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D20A73132BF7327700D896E4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		D20A72D12BF6C7D400D896E4 /* fluentFlow */ = {
 			isa = PBXGroup;
 			children = (
+				D20A73122BF71AE000D896E4 /* Info.plist */,
 				D20A72FE2BF6C7E700D896E4 /* Models */,
 				D20A72FD2BF6C7E400D896E4 /* Views */,
 				D20A72FC2BF6C7E000D896E4 /* ViewModels */,
@@ -117,6 +120,7 @@
 				D20A72D42BF6C7D400D896E4 /* ContentView.swift */,
 				D20A72D62BF6C7D500D896E4 /* Assets.xcassets */,
 				D20A72D82BF6C7D500D896E4 /* Preview Content */,
+				D20A73132BF7327700D896E4 /* Config.xcconfig */,
 			);
 			path = fluentFlow;
 			sourceTree = "<group>";
@@ -271,6 +275,9 @@
 				Base,
 			);
 			mainGroup = D20A72C62BF6C7D400D896E4;
+			packageReferences = (
+				D20A73112BF71AA000D896E4 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			productRefGroup = D20A72D02BF6C7D400D896E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -489,6 +496,7 @@
 				DEVELOPMENT_TEAM = J8MDB2S5JT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = fluentFlow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -518,6 +526,7 @@
 				DEVELOPMENT_TEAM = J8MDB2S5JT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = fluentFlow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -652,6 +661,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D20A73112BF71AA000D896E4 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.22.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = D20A72C72BF6C7D400D896E4 /* Project object */;
 }
