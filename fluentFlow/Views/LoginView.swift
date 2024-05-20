@@ -6,8 +6,15 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct LoginView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    @AppStorage("email") var email: String = ""
+    @AppStorage("firstName") var firstName: String = ""
+    @AppStorage("lastName") var lastName: String = ""
+    @AppStorage("userId") var userId: String = ""
     
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     let loginStatusInfo: (Bool) -> String = { isLoggedIn in
@@ -80,6 +87,50 @@ struct LoginView: View {
             .padding(.horizontal, 20)
             .padding(.top, 10)
             
+            // Apple Login Button
+            SignInWithAppleButton(.signIn) { request in
+                request.requestedScopes = [.email, .fullName]
+                
+            } onCompletion: { result in
+                switch result {
+                case .success(let auth):
+                    switch auth.credential{
+                    case let credential as ASAuthorizationAppleIDCredential:
+                        // User Id
+                        let userID = credential.user
+                        
+                        // User Info
+                        let email = credential.email
+                        let firstName = credential.fullName?.givenName
+                        let lasttName = credential.fullName?.familyName
+                        
+                        
+                        self.userId = userID
+                        
+                        self.email = email ?? ""
+                        self.firstName = firstName ?? ""
+                        self.lastName = lasttName ?? ""
+                        
+                        
+                        break
+                        
+                    default :
+                        break
+                    }
+                    
+                    break
+                case .failure(let error):
+                    break
+                }
+                
+            }
+            .signInWithAppleButtonStyle(
+                colorScheme == .dark ? .white : .black
+            )
+            .frame(height: 50)
+            .padding()
+            .cornerRadius(8)
+            
             // 카카오 로그인 버튼
             Button(action: {
                 viewModel.handleKakaoLogin()
@@ -92,7 +143,7 @@ struct LoginView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(Color.yellow)
-                .cornerRadius(5.0)
+                .cornerRadius(8)
             }
             .padding(.horizontal, 20)
             .padding(.top, 10)
