@@ -22,6 +22,7 @@ struct EnglishLevelView: View {
     
     @State private var selectedOption: String? = nil
     @State private var showWebView: Bool = false
+    @State private var isShowingPurposesView = false
     
     let cefrLevels = ["C1", "B2", "B1", "A2", "A1"]
     
@@ -34,7 +35,7 @@ struct EnglishLevelView: View {
     ]
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "line.horizontal.3")
@@ -109,6 +110,9 @@ struct EnglishLevelView: View {
                     
                     Button(action: {
                         // 선택 완료 버튼 동작
+                        if selectedOption != nil {
+                            isShowingPurposesView = true
+                        }
                     }) {
                         Text("선택 완료")
                             .foregroundColor(.white)
@@ -122,6 +126,9 @@ struct EnglishLevelView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isShowingPurposesView) {
+                PurposesView()
+            }
         }
     }
 }

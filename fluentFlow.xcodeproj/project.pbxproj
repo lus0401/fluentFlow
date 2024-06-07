@@ -48,6 +48,7 @@
 		D20A73452BFF1D6A00D896E4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20A73442BFF1D6A00D896E4 /* SignUpView.swift */; };
 		D2C6F8752C11EEFC006235F3 /* PurposesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8742C11EEFC006235F3 /* PurposesView.swift */; };
 		D2C6F8772C12F60B006235F3 /* EnglishLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8762C12F60B006235F3 /* EnglishLevelView.swift */; };
+		D2C6F8792C13511F006235F3 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6F8782C13511F006235F3 /* ChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		D20A73442BFF1D6A00D896E4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D2C6F8742C11EEFC006235F3 /* PurposesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurposesView.swift; sourceTree = "<group>"; };
 		D2C6F8762C12F60B006235F3 /* EnglishLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishLevelView.swift; sourceTree = "<group>"; };
+		D2C6F8782C13511F006235F3 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 				D20A73442BFF1D6A00D896E4 /* SignUpView.swift */,
 				D2C6F8742C11EEFC006235F3 /* PurposesView.swift */,
 				D2C6F8762C12F60B006235F3 /* EnglishLevelView.swift */,
+				D2C6F8782C13511F006235F3 /* ChatView.swift */,
 				D20A72FF2BF6C82D00D896E4 /* Custom */,
 			);
 			path = Views;
@@ -406,6 +409,7 @@
 				D2C6F8752C11EEFC006235F3 /* PurposesView.swift in Sources */,
 				D20A72D52BF6C7D400D896E4 /* ContentView.swift in Sources */,
 				D20A72D32BF6C7D400D896E4 /* fluentFlowApp.swift in Sources */,
+				D2C6F8792C13511F006235F3 /* ChatView.swift in Sources */,
 				D20A73042BF6C9C200D896E4 /* LoginView.swift in Sources */,
 				D20A73012BF6C9A400D896E4 /* User.swift in Sources */,
 				D20A73102BF6CC8400D896E4 /* ProfileViewModel.swift in Sources */,
