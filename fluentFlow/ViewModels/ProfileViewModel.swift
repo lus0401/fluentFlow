@@ -1,10 +1,3 @@
-//
-//  ProfileViewModel.swift
-//  fluentFlow
-//
-//  Created by Lee HyeKyung on 5/17/24.
-//
-
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
@@ -12,6 +5,10 @@ class ProfileViewModel: ObservableObject {
 
     init() {
         // 임시 유저 데이터 로드
-        self.user = User(username: "JohnDoe", email: "john.doe@example.com")
+        self.user = User(username: "", email: "")
+    }
+    
+    func updateUserInformation(username: String, email: String) {
+        self.user = User(username: username, email: email)
     }
 }

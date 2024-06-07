@@ -1,11 +1,3 @@
-//
-//  ProfileView.swift
-//  fluentFlow
-//
-//  Created by Lee HyeKyung on 5/17/24.
-//
-
-
 import SwiftUI
 
 struct ProfileView: View {
@@ -13,14 +5,6 @@ struct ProfileView: View {
     @State var showingAlert: Bool = false
     
     var body: some View {
-//
-//        if let user = viewModel.user {
-//            Text("Username: \(user.username)")
-//            Text("Email: \(user.email)")
-//        } else {
-//            Text("No user data available")
-//        }
-        
         NavigationView {
             List{
                 Section{
@@ -38,12 +22,12 @@ struct ProfileView: View {
                     navigationLinkCell(imageName: "wifi",
                               cellTitle: "WIFI",
                               cellInfo: "AFGSE_ER4563"){
-                        Text("sWIFI Screen")
+                        Text("WIFI Screen")
                     }
                     
                     navigationLinkCell(imageName: "lock.fill",
                               cellTitle: "Password"){
-                        Text("password Screen")
+                        Text("Password Screen")
                     }
 
                 }
@@ -56,6 +40,12 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("Profile")
+            .onAppear {
+                // Load user data when the view appears
+                if let user = viewModel.user {
+                    print("User: \(user.username), Email: \(user.email)")
+                }
+            }
         }
     }
     
@@ -71,11 +61,11 @@ struct ProfileView: View {
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 3){
-                Text("Lee HyeKyung")
+                Text(viewModel.user?.username ?? "Unknown")
                     .font(.system(size: 24))
                     .fontWeight(.regular)
                 
-                Text("blablablabla ")
+                Text(viewModel.user?.email ?? "Unknown Email")
                     .font(.system(size: 14))
                     .fontWeight(.light)
             }
@@ -117,7 +107,6 @@ struct ProfileView: View {
         }
     }
 }
-
 
 #Preview {
     ProfileView()

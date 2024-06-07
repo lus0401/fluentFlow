@@ -42,6 +42,13 @@ struct SignUpView: View {
                     .cornerRadius(10)
             }
             .padding()
+            
+//            //웹뷰 구현
+//            Button() {
+//                Text("개인정보 처리방침 보기")
+//                    .padding()
+//            }
+//            .padding()
         }
         .padding()
     }
@@ -72,5 +79,12 @@ struct SignUpView: View {
                 }
             }
         }
+    }
+}
+
+struct SignUpView_Previews: PreviewProvider {
+    @State static var isLoggedIn = true
+    static var previews: some View {
+        SignUpView()
     }
 }
