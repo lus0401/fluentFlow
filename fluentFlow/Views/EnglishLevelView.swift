@@ -1,23 +1,7 @@
 import SwiftUI
-import WebKit
 
-// WKWebView를 Wrapping하는 구조체
-struct WebView: UIViewRepresentable {
-    let url: URL
-
-    func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
-    }
-
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        let request = URLRequest(url: url)
-        uiView.load(request)
-    }
-}
-
-// 메인 뷰
 struct EnglishLevelView: View {
-    
+    @EnvironmentObject var userSettings: UserSettings
     @Binding var isLoggedIn: Bool
     
     @State private var selectedOption: String? = nil
@@ -37,27 +21,22 @@ struct EnglishLevelView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.largeTitle)
-                    Spacer()
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.largeTitle)
-                }
-                .padding(20)
+
 
                 Text("현재 영어레벨은 어느정도이신가요?")
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
-                    .padding(.bottom, 5)
+               
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
                 
                 Text("적절한 대화 생성을 위해 필요해요!\n외부에 공개되지 않아요.")
                     .font(.subheadline)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 5)
                 
                 Button(action: {
                     showWebView.toggle()
@@ -106,24 +85,26 @@ struct EnglishLevelView: View {
                     }
                     .padding(.horizontal)
                     
-                    Spacer()
                     
-                    Button(action: {
-                        // 선택 완료 버튼 동작
-                        if selectedOption != nil {
-                            isShowingPurposesView = true
-                        }
-                    }) {
-                        Text("선택 완료")
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(selectedOption == nil ? Color.gray : Color.yellow)
-                            .cornerRadius(10)
-                    }
-                    .padding(.horizontal)
-                    .disabled(selectedOption == nil)
+              
                 }
+                
+                Button(action: {
+                    // 선택 완료 버튼 동작
+                    if let selectedOption = selectedOption {
+                        userSettings.selectedEnglishLevel = selectedOption
+                        isShowingPurposesView = true
+                    }
+                }) {
+                    Text("선택 완료")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(selectedOption == nil ? Color.gray : Color.yellow)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                .disabled(selectedOption == nil)
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isShowingPurposesView) {

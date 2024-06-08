@@ -1,19 +1,34 @@
-//
-//  ChatPracticeView.swift
-//  fluentFlow
-//
-//  Created by Lee HyeKyung on 5/17/24.
-//
-
 import SwiftUI
 
 struct ChatPracticeView: View {
-    @ObservedObject var viewModel = ChatPracticeViewModel()
+   // @ObservedObject var viewModel = ChatPracticeViewModel()
 
     var body: some View {
-        Text("Chat Practice Page")
-            .font(.largeTitle)
-            .padding()
+        VStack {
+            HStack {
+             Image(systemName: "line.horizontal.3")
+             .font(.largeTitle)
+             Spacer()
+             Image(systemName: "person.crop.circle.fill")
+             .font(.largeTitle)
+             }
+            .padding(20)
+            
+            Spacer()
+
+            Text("Chat Practice View")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal)
+                .padding(.top, 10)
+                .padding(.bottom, 10)
+            
+            Spacer()
+        }
+        
+
+
     }
 }
 

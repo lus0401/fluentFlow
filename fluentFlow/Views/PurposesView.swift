@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct PurposesView: View {
+    @EnvironmentObject var userSettings: UserSettings
     @State private var selectedOptions: Set<String> = []
-    
+    @State private var isShowingChatPracticeView = false
+
     let purposes = ["여행을 위해", "직장/비즈니스", "학업/유학", "새로운 사람들과 소통", "자기계발", "문화 및 엔터테인먼트"]
     
     let purposesIcons = [
@@ -25,29 +27,22 @@ struct PurposesView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "line.horizontal.3")
-                    .font(.largeTitle)
-                Spacer()
-                Image(systemName: "person.crop.circle.fill")
-                    .font(.largeTitle)
-            }
-            .padding(20)
 
             Text("무엇을 위해 공부하고싶습니까?")
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal)
+                .padding(.top, 10)
+                .padding(.bottom, 10)
             
             Text("선택한 정보를 바탕으로 대화가 구성되요.\n옵션은 언제든지 수정가능해요.")
                 .font(.subheadline)
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal)
+                .padding(.bottom, 15)
             
-            Spacer().frame(height: 10)
-            
-            ScrollView{
+            ScrollView {
                 VStack(spacing: 10) {
                     ForEach(purposes, id: \.self) { option in
                         Button(action: {
@@ -83,30 +78,34 @@ struct PurposesView: View {
                     }
                 }
                 .padding(.horizontal)
-                
-                Spacer()
-                
-                Button(action: {
-                    // 선택 완료 버튼 동작
-                }) {
-                    Text("선택 완료")
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(selectedOptions.isEmpty ? Color.gray : Color.yellow)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                .disabled(selectedOptions.isEmpty)
             } // ScrollView
-
+            
+            Button(action: {
+                // 선택 완료 버튼 동작
+                userSettings.selectedPurposes = Array(selectedOptions)
+                isShowingChatPracticeView = true
+            }) {
+                Text("선택 완료")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(selectedOptions.isEmpty ? Color.gray : Color.yellow)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .disabled(selectedOptions.isEmpty)
         }
+        .padding(.bottom, 20) // VStack 하단에 패딩 추가
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: $isShowingChatPracticeView) {
+            ChatPracticeView()
+        }
     }
 }
 
 struct PurposesView_Previews: PreviewProvider {
     static var previews: some View {
         PurposesView()
+            .environmentObject(UserSettings())
     }
 }

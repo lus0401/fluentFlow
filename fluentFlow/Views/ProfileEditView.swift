@@ -1,20 +1,19 @@
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileEditView: View {
     @EnvironmentObject var userSettings: UserSettings
     @State var showingAlert: Bool = false
-    @State var isNavigationBarHidden: Bool = false
+    @Binding var isNavigationBarHidden: Bool
+    
+    init(navigationBarHidden: Binding<Bool> = .constant(false)) {
+        _isNavigationBarHidden = navigationBarHidden
+    }
     
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    NavigationLink {
-                        Text("Profile")
-                    } label: {
-                        profileCell()
-                    }
-                }
+                Circle().frame(width: 80, height: 80, alignment: .center)
+                
                 Section {
                     toggleCell(imageName: "person.fill",
                                cellTitle: "초집중모드",
@@ -55,42 +54,14 @@ struct ProfileView: View {
                 }
             }
             .navigationTitle("Profile")
+            .navigationBarHidden(self.isNavigationBarHidden)
             .onAppear {
-                // Load user data when the view appears
-                print("User: \(userSettings.selectedEnglishLevel ?? "No Level Selected"), Purposes: \(userSettings.selectedPurposes.joined(separator: ", "))")
+                self.isNavigationBarHidden = true
             }
         }
         
     }//NavigationView
     
-    @ViewBuilder
-    private func profileCell() -> some View {
-        HStack {
-            Image(systemName: "person.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .padding(.all, 15)
-                .background(.yellow)
-                .clipShape(Circle())
-            
-            VStack(alignment: .leading, spacing: 3) {
-                Text("UserName")
-                    .font(.system(size: 24))
-                    .fontWeight(.regular)
-                
-                Text(userSettings.selectedEnglishLevel ?? "Unknown")
-                    .font(.system(size: 14))
-                    .fontWeight(.regular)
-                
-                Text(userSettings.selectedPurposes.joined(separator: ", "))
-                    .font(.system(size: 14))
-                    .fontWeight(.light)
-            }
-            .padding(.horizontal, 6)
-        }
-        .padding(.vertical, 10)
-    }
     
     @ViewBuilder
     private func toggleCell(imageName: String, cellTitle: String, isModeOn: Binding<Bool>) -> some View {
@@ -126,9 +97,9 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileEditView()
             .environmentObject(UserSettings())
     }
 }

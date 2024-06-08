@@ -1,20 +1,12 @@
 import SwiftUI
 
-struct ProfileView: View {
+struct OptionsEditView: View {
     @EnvironmentObject var userSettings: UserSettings
     @State var showingAlert: Bool = false
-    @State var isNavigationBarHidden: Bool = false
     
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    NavigationLink {
-                        Text("Profile")
-                    } label: {
-                        profileCell()
-                    }
-                }
                 Section {
                     toggleCell(imageName: "person.fill",
                                cellTitle: "초집중모드",
@@ -60,8 +52,7 @@ struct ProfileView: View {
                 print("User: \(userSettings.selectedEnglishLevel ?? "No Level Selected"), Purposes: \(userSettings.selectedPurposes.joined(separator: ", "))")
             }
         }
-        
-    }//NavigationView
+    }
     
     @ViewBuilder
     private func profileCell() -> some View {
@@ -75,12 +66,8 @@ struct ProfileView: View {
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 3) {
-                Text("UserName")
-                    .font(.system(size: 24))
-                    .fontWeight(.regular)
-                
                 Text(userSettings.selectedEnglishLevel ?? "Unknown")
-                    .font(.system(size: 14))
+                    .font(.system(size: 24))
                     .fontWeight(.regular)
                 
                 Text(userSettings.selectedPurposes.joined(separator: ", "))
@@ -126,9 +113,9 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct OptionsEditView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        OptionsEditView()
             .environmentObject(UserSettings())
     }
 }

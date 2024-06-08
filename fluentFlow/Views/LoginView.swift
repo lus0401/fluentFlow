@@ -12,6 +12,7 @@ struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     @State private var showSignUp = false
     @State private var isLoggedIn = false
+    @StateObject var userSettings = UserSettings()
 
     var body: some View {
         NavigationStack {
@@ -125,7 +126,7 @@ struct LoginView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: EnglishLevelView(isLoggedIn: $isLoggedIn), isActive: $isLoggedIn) {
+                NavigationLink(destination: destinationView(), isActive: $isLoggedIn) {
                     EmptyView()
                 }
             }
@@ -134,11 +135,17 @@ struct LoginView: View {
                 isLoggedIn = newValue
             }
         }
+        .environmentObject(userSettings)
     }
-}
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView(viewModel: LoginViewModel())
+    @ViewBuilder
+    private func destinationView() -> some View {
+        if userSettings.selectedEnglishLevel == nil {
+            EnglishLevelView(isLoggedIn: $isLoggedIn)
+        } else if userSettings.selectedPurposes.isEmpty {
+            PurposesView()
+        } else {
+            ChatPracticeView()
+        }
     }
 }
